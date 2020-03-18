@@ -1,4 +1,4 @@
-import React, { createContext, Component, lazy, Suspense } from 'react';
+import React, { createContext, Component, lazy, Suspense, memo } from 'react';
 import './App.css';
 
 // webpack magic comment
@@ -17,6 +17,16 @@ class Leaf extends Component {
     );
   }
 } */
+
+const Foo = memo(props => {
+  console.log('foo');
+  return <div>aa</div>;
+});
+/* 
+const Foo = props => {
+  console.log('foo');
+  return <div>aa</div>;
+}; */
 
 class Leaf extends Component {
   static contextType = BatteryContext;
@@ -68,6 +78,7 @@ class App extends Component {
             <About></About>
           </Suspense>
         </BatteryContext.Provider>
+        <Foo></Foo>
       </div>
     );
   }
