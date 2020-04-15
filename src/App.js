@@ -19,7 +19,7 @@ class Leaf extends Component {
 } */
 
 const Foo = memo(props => {
-  console.log('foo');
+  // console.log('foo');
   return <div>aa</div>;
 });
 /* 
@@ -60,10 +60,20 @@ class App extends Component {
     };
   }
 
+  componentWillMount(){
+    console.log('will mount');
+  }
+
+  componentDidMount(){
+    console.log('did mount');
+  }
+
   render() {
     if (this.state.error) {
       return <div>error</div>;
     }
+
+    console.log('render');
 
     return (
       <div className='App'>
