@@ -1,97 +1,157 @@
-import React, { createContext, Component, lazy, Suspense, memo } from 'react';
+// import React, {
+//   useEffect,
+//   useState,
+//   useMemo,
+//   useRef,
+//   useCallback,
+//   memo,
+// } from 'react';
+// import './App.css';
+
+// let idSeq = Date.now();
+
+// const Control = memo(function Control(props) {
+//   const { addTodo } = props;
+//   const inputRef = useRef();
+
+//   const onSubmit = (e) => {
+//     e.preventDefault();
+
+//     const newText = inputRef.current.value.trim();
+
+//     if (newText.length === 0) {
+//       return;
+//     }
+
+//     addTodo({
+//       id: ++idSeq,
+//       text: newText,
+//       complete: false,
+//     });
+
+//     inputRef.current.value = '';
+//   };
+
+//   return (
+//     <div className='control'>
+//       <h1>todos</h1>
+//       <form onSubmit={onSubmit}>
+//         <input
+//           type='text'
+//           ref={inputRef}
+//           className='new-todo'
+//           placeholder='What needs to be done?'
+//         />
+//       </form>
+//     </div>
+//   );
+// });
+
+// const TodoItem = memo(function TodoItem(props) {
+//   const {
+//     todo: { id, text, complete },
+//     toggleTodo,
+//     removeTodo,
+//   } = props;
+
+//   const onChange = () => {
+//     toggleTodo(id);
+//   };
+
+//   const onRemove = () => {
+//     removeTodo(id);
+//   };
+
+//   return (
+//     <li className='todo-item'>
+//       <input type='checkbox' onChange={onChange} checked={complete} />
+//       <label className={complete ? 'complete' : ''}>{text}</label>
+//       <button onClick={onRemove}>&#xd7;</button>
+//     </li>
+//   );
+// });
+
+// const Todos = memo(function Todos(props) {
+//   const { todos, toggleTodo, removeTodo } = props;
+//   return (
+//     <ul>
+//       {todos.map((todo) => {
+//         return (
+//           <TodoItem
+//             key={todo.id}
+//             todo={todo}
+//             toggleTodo={toggleTodo}
+//             removeTodo={removeTodo}
+//           />
+//         );
+//       })}
+//     </ul>
+//   );
+// });
+
+// const LS_KEY = '_$-todos_';
+
+// function TodoList() {
+//   const [todos, setTodos] = useState([]);
+
+//   const addTodo = useCallback((todo) => {
+//     setTodos((todos) => [...todos, todo]);
+//   }, []);
+
+//   const removeTodo = useCallback((id) => {
+//     setTodos((todos) =>
+//       todos.filter((todo) => {
+//         return todo.id !== id;
+//       })
+//     );
+//   }, []);
+
+//   const toggleTodo = useCallback((id) => {
+//     setTodos((todos) =>
+//       todos.map((todo) => {
+//         return todo.id === id
+//           ? {
+//               ...todo,
+//               complete: !todo.complete,
+//             }
+//           : todo;
+//       })
+//     );
+//   }, []);
+
+//   useEffect(() => {
+//     const todos = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+//     setTodos(todos);
+//   }, []);
+
+//   useEffect(() => {
+//     localStorage.setItem(LS_KEY, JSON.stringify(todos));
+//   }, [todos]);
+
+//   return (
+//     <div className='todo-list'>
+//       <Control addTodo={addTodo} />
+//       <Todos removeTodo={removeTodo} toggleTodo={toggleTodo} todos={todos} />
+//     </div>
+//   );
+// }
+
+// export default TodoList;
+
+/*
+design:
+
+todoList [control[h3, input+label+span], todos[todoItem]]
+
+*/
+
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-// webpack magic comment
-const About = lazy(() => import(/*webpackChunkName:'about'*/ './about'));
-const BatteryContext = createContext();
-/* 
-class Leaf extends Component {
-  static contextType = BatteryContext;
-  render() {
-    return (
-      <BatteryContext.Consumer>
-        {value => {
-          return <h1> Battery: {value}</h1>;
-        }}
-      </BatteryContext.Consumer>
-    );
-  }
-} */
+const TodoList = (props) => {
+  const [todoList, setTodoList] = useState([]);
 
-const Foo = memo(props => {
-  // console.log('foo');
-  return <div>aa</div>;
-});
-/* 
-const Foo = props => {
-  console.log('foo');
-  return <div>aa</div>;
-}; */
+  return <> todoList</>;
+};
 
-class Leaf extends Component {
-  static contextType = BatteryContext;
-  render() {
-    const battery = this.context;
-    return <h1> Battery: {battery}</h1>;
-  }
-}
-class Middle extends Component {
-  render() {
-    return <Leaf></Leaf>;
-  }
-}
-
-class App extends Component {
-  state = {
-    Battery: 60,
-    error: false
-  };
-
-  /* componentDidCatch() {
-    this.setState({
-      error: true
-    });
-  } */
-
-  /* 如遇页面报错，右上角小x关掉 */
-  static getDerivedStateFromError() {
-    return {
-      error: true
-    };
-  }
-
-  componentWillMount(){
-    console.log('will mount');
-  }
-
-  componentDidMount(){
-    console.log('did mount');
-  }
-
-  render() {
-    if (this.state.error) {
-      return <div>error</div>;
-    }
-
-    console.log('render');
-
-    return (
-      <div className='App'>
-        <BatteryContext.Provider value={this.state.Battery}>
-          <button
-            onClick={() => this.setState({ Battery: this.state.Battery - 1 })}
-          >
-            press me
-          </button>
-          <Middle></Middle>
-          <Suspense fallback={<div>loading</div>}>
-            <About></About>
-          </Suspense>
-        </BatteryContext.Provider>
-        <Foo></Foo>
-      </div>
-    );
-  }
-}
-
-export default App;
+export default TodoList;
