@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import App from './App';
+import Demo from './Demo';
 import store from './store';
 
 import 'normalize.css/normalize.css';
@@ -18,13 +19,15 @@ import 'normalize.css/normalize.css';
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Link to='/path'>home</Link>
+      <Link to="/path">home</Link>
+      <Link to="/demo">demo</Link>
 
       <Switch>
-        <Route path='/path'>
+        <Route path="/path">
           <App />
         </Route>
-        <Redirect to='/haha'></Redirect>
+        <Route path="/demo" component={Demo}></Route>
+        <Redirect to="/hahssa"></Redirect>
       </Switch>
     </Router>
   </Provider>,
