@@ -12,6 +12,7 @@ import {
 import './App.css';
 import App from './App';
 import Demo from './Demo';
+import Portal from './Portal';
 import store from './store';
 
 import 'normalize.css/normalize.css';
@@ -21,12 +22,14 @@ ReactDOM.render(
     <Router>
       <Link to="/path">home</Link>
       <Link to="/demo">demo</Link>
+      <Link to="/portal">portal</Link>
 
       <Switch>
         <Route path="/path">
           <App />
         </Route>
         <Route path="/demo" component={Demo}></Route>
+        <Route path="/portal" component={Portal}></Route>
         <Redirect to="/hahssa"></Redirect>
       </Switch>
     </Router>
