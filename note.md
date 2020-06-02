@@ -29,3 +29,7 @@ ls | grep -v serviceWorker.js | xargs rm
 11. form 提交
 
 12. createContext 需要和 useContext 配合使用，后者相当于 Context.Consumer
+
+css 相关
+
+1. 对于 header 部分的定位，内部存在绝对定位的时候，一定要把父元素的高度设置准确撑开

@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import App from './App';
-import store from './store';
+import store from '../store/store';
 
 import 'normalize.css/normalize.css';
 

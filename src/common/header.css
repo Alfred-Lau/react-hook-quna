@@ -1,12 +1,18 @@
 .header {
-  background: #eee;
+  background: linear-gradient(90deg, #00c9e2 3%, #00e4f5 92%);
   padding: 6px 12px;
   text-align: center;
+  height: 44px;
+  line-height: 44px;
+  position: relative;
 }
 
 .header .goBack {
-  float: left;
+  position: absolute;
+  left: 0;
+  height: 44px;
 }
 
 .header .title {
+  color: #fff;
 }

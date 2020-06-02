@@ -1,0 +1,20 @@
+.singleSelect {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 54px;
+  line-height: 54px;
+  border-top: 1px solid #eee;
+}
+
+.singleSelect .left .text,
+.singleSelect .right .text {
+  padding-left: 6px;
+  color: #616161;
+  font-size: 14px;
+}
+
+.singleSelect .left input,
+.singleSelect .right input {
+  vertical-align: middle;
+}

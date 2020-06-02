@@ -1,0 +1,13 @@
+.bg-image {
+  background: url(http://s.qunarzz.com/train_touch/pictures/top_title.png);
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+}
+.search-box {
+  border-radius: 8px;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.14);
+  background: #fff;
+  margin: -6px 20px 20px 20px;
+  padding: 20px;
+}
