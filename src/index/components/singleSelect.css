@@ -18,3 +18,8 @@
 .singleSelect .right input {
   vertical-align: middle;
 }
+
+.left-checkbox,
+.right-checkbox {
+  border-radius: 50%;
+}

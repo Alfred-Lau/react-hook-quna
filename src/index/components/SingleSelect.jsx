@@ -6,11 +6,11 @@ export default function SingleSelect(props) {
   return (
     <div className="singleSelect">
       <div className="left">
-        <input type="radio" className="left-radio" />
+        <input type="checkbox" className="left-checkbox" />
         <span className="text">只看高铁动车</span>
       </div>
       <div className="right">
-        <input type="radio" className="right-radio" />
+        <input type="checkbox" className="right-checkbox" />
         <span className="text">学生票</span>
       </div>
     </div>
