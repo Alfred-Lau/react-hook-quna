@@ -27,17 +27,35 @@
   display: inline-block;
   position: absolute;
   top: 6px;
+  width: 100%;
+}
+.city-selector .city-search-header .city-search-box .search-icon {
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  color: #aaa;
+}
+
+.city-selector .city-search-header .city-search-box .close-icon {
+  position: absolute;
+  top: 13px;
+  color: #aaa;
+  font-size: 18px;
+  right: 73px;
 }
 
 .city-selector .city-search-header .city-search-box .search-content {
   height: 44px;
-  width: 100%;
   border: none;
   border-radius: 6px;
-  width: 320px;
+  width: 75%;
   margin: 0;
   padding: 0;
-  padding-left: 10px;
+  padding-left: 30px;
+}
+
+.city-selector .city-search-header .city-search-box .search-content:focus {
+  outline: none;
 }
 
 .hidden {

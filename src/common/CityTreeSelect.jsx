@@ -24,12 +24,13 @@ export default function CityTreeSelect(props) {
           </svg>
         </span>
         <div className="city-search-box">
+          <i class="iconfont search-icon">&#xe632;</i>
           <input
             type="text"
             className="search-content"
             placeholder="城市车站的中文或拼音"
           />
-          <i className="close"></i>
+          <i className="iconfont close-icon">&#xe62a;</i>
         </div>
       </div>
     </div>

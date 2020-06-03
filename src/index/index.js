@@ -8,7 +8,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import './App.css';
+import './index.css';
 import App from './App';
 import store from '../store/store';
 
