@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import './addressSelect.css';
 export default function AddressSelect(props) {
-  const [target, setTarget] = useState('北京');
-  const [destination, setDestination] = useState('上海');
+  const { from, to, exchangeFromTo } = props;
+
   return (
     <div className="addressSelect">
-      <span className="target">{target}</span>
-      <span className="target">==</span>
-      <span className="destination">{destination}</span>
+      <span className="target">{from}</span>
+      <span className="target" onClick={exchangeFromTo}>
+        ==
+      </span>
+      <span className="destination">{to}</span>
     </div>
   );
 }
+
+AddressSelect.propTypes = {
+  from: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+  exchangeFromTo: PropTypes.func.isRequired,
+};
