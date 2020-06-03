@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -22,6 +22,7 @@ export default function CityTreeSelect(props) {
   const { cityData, cityVisible, handleSelect, goBack } = props;
 
   const [searchKey, setSearchKey] = useState('');
+  const key = useMemo(() => searchKey.trim(), [searchKey]);
 
   const citySelector = classnames('city-selector', {
     hidden: !cityVisible,
@@ -51,7 +52,7 @@ export default function CityTreeSelect(props) {
         <i
           onClick={() => setSearchKey('')}
           className={classnames('search-clean', {
-            // hidden: key.length === 0,
+            hidden: key.length === 0,
           })}
         >
           &#xf063;
