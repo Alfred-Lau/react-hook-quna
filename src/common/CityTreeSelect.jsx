@@ -1,25 +1,96 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './cityTreeSelect.css';
+import './cityTreeSelect.scss';
+
+function AlphaIndex(props) {
+  const { name, handleClick } = props;
+  return (
+    <li className="alpha-item" onClick={handleClick}>
+      {name}
+    </li>
+  );
+}
+
+AlphaIndex.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
+
+function AlphaBet(props) {
+  const { handleClick } = props;
+  const dataSource = Array.from(Array(26), (v, i) => {
+    return String.fromCharCode(i + 65);
+  });
+
+  return (
+    <div className="alpha-bet">
+      {dataSource.map((item) => {
+        return <AlphaIndex name={item} handleClick={handleClick}></AlphaIndex>;
+      })}
+    </div>
+  );
+}
+
+AlphaBet.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
+function City(props) {
+  const { name, handleClick } = props;
+  return (
+    <li onClick={() => handleClick(name)} className="city">
+      {name}
+    </li>
+  );
+}
+
+City.propTypes = {
+  name: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
+
+function CitySection(props) {
+  const { section, handleSelect } = props;
+  return (
+    <ul className="city-section">
+      {section.map((item) => {
+        return <City name={item.name} handleClick={handleSelect}></City>;
+      })}
+    </ul>
+  );
+}
+
+CitySection.propTypes = {
+  section: PropTypes.array.isRequired,
+  handleSelect: PropTypes.func.isRequired,
+};
 
 function CityList(props) {
-  const { handleClick, cityData } = props;
+  const { handleSelect, cityData } = props;
 
   return (
     <div className="city-list">
       {cityData.map((item) => {
         return (
-          <div>
-            <h4>{item.title}</h4>
-            <p>{JSON.stringify(item.citys)}</p>
+          <div className="city-content">
+            <h4 className="city-title">{item.title}</h4>
+            <CitySection
+              section={item.citys || []}
+              handleSelect={handleSelect}
+            ></CitySection>
           </div>
         );
       })}
     </div>
   );
 }
+
+CityList.propTypes = {
+  handleSelect: PropTypes.func.isRequired,
+  cityData: PropTypes.array.isRequired,
+};
 
 export default function CityTreeSelect(props) {
   const { cityData, cityVisible, handleSelect, goBack, isLoading } = props;
@@ -32,6 +103,10 @@ export default function CityTreeSelect(props) {
     hidden: !cityVisible,
   });
 
+  const handleClickAlpha = useCallback(() => {
+    //
+  }, []);
+
   useEffect(() => {
     if (!cityVisible || cityData || isLoading) {
       fetch('/rest/cities')
@@ -39,7 +114,6 @@ export default function CityTreeSelect(props) {
           return value.json();
         })
         .then((value) => {
-          console.log(value);
           const { cityList } = value;
           setResult(cityList);
         });
@@ -76,7 +150,8 @@ export default function CityTreeSelect(props) {
           &#xf063;
         </i>
       </div>
-      <CityList cityData={result}></CityList>
+      <CityList cityData={result} handleSelect={handleSelect}></CityList>
+      <AlphaBet handleClick={handleClickAlpha}></AlphaBet>
     </div>
   );
 }
