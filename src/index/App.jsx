@@ -17,6 +17,7 @@ const App = function (props) {
   const { from, to, dispatch } = props;
 
   const [cityVisible, setCityVisible] = useState(false);
+  const [isCityLoading, setIsCityLoading] = useState(false);
 
   const [time, setTime] = useState(new Date().getTime());
   /* 为了避免每次创建新的函数句柄生成造成重新渲染，我们需要使用 useE 把函数的使用包起来 ,这样保证函数只会生成一次，进而 Header 组件只会渲染一次*/
@@ -52,10 +53,11 @@ const App = function (props) {
         <Submit title="搜索" onSubmit={handleSubmit}></Submit>
       </div>
       <CityTreeSelect
-        cityData={[]}
+        cityData={{}}
         cityVisible={cityVisible}
         handleSelect={handleSelect}
         goBack={handleVisible}
+        isLoading={isCityLoading}
       ></CityTreeSelect>
     </>
   );

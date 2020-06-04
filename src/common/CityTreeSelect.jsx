@@ -1,32 +1,50 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './cityTreeSelect.css';
 
-function CityShowArea(props) {
-  const { hotSpot } = props;
+function CityList(props) {
+  const { handleClick, cityData } = props;
+
   return (
-    <div className="city-show-area">
-      <h5 className="city-show-title">定位/历史</h5>
-      <div className="city-show content">
-        <input type="button" className="location" value="定位"></input>
-      </div>
-      <h5 className="city-show-title">热门</h5>
-      <div className="city-show content">热门</div>
+    <div className="city-list">
+      {cityData.map((item) => {
+        return (
+          <div>
+            <h4>{item.title}</h4>
+            <p>{JSON.stringify(item.citys)}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 export default function CityTreeSelect(props) {
-  const { cityData, cityVisible, handleSelect, goBack } = props;
+  const { cityData, cityVisible, handleSelect, goBack, isLoading } = props;
 
   const [searchKey, setSearchKey] = useState('');
+  const [result, setResult] = useState([]);
   const key = useMemo(() => searchKey.trim(), [searchKey]);
 
   const citySelector = classnames('city-selector', {
     hidden: !cityVisible,
   });
+
+  useEffect(() => {
+    if (!cityVisible || cityData || isLoading) {
+      fetch('/rest/cities')
+        .then((value) => {
+          return value.json();
+        })
+        .then((value) => {
+          console.log(value);
+          const { cityList } = value;
+          setResult(cityList);
+        });
+    }
+  }, [cityData, cityVisible, isLoading]);
   return (
     <div className={citySelector}>
       <div className="city-search">
@@ -58,14 +76,15 @@ export default function CityTreeSelect(props) {
           &#xf063;
         </i>
       </div>
-      <CityShowArea hotSpot={[]}></CityShowArea>
+      <CityList cityData={result}></CityList>
     </div>
   );
 }
 
 CityTreeSelect.propTypes = {
-  cityData: PropTypes.array.isRequired,
+  cityData: PropTypes.object.isRequired,
   cityVisible: PropTypes.bool.isRequired,
   handleSelect: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };

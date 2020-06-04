@@ -11,7 +11,7 @@ export default function AddressSelect(props) {
         {from}
       </span>
       <span className="target" onClick={exchangeFromTo}>
-        ==
+        <i className="iconfont exchange">&#xe618;</i>
       </span>
       <span className="destination" onClick={toggleSelector}>
         {to}
