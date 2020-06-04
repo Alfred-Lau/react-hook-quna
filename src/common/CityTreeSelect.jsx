@@ -75,7 +75,7 @@ function CityList(props) {
       {cityData.map((item) => {
         return (
           <div className="city-content" data-cate={item.title}>
-            <h4 className="city-title">{item.title}</h4>
+            <div className="city-title">{item.title}</div>
             <CitySection
               section={item.citys || []}
               handleSelect={handleSelect}
