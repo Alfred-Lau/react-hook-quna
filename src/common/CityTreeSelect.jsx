@@ -4,6 +4,10 @@ import classnames from 'classnames';
 
 import './cityTreeSelect.scss';
 
+function SuggestItem(props) {
+  const { name } = props;
+}
+
 function AlphaIndex(props) {
   const { name, handleClick } = props;
   return (

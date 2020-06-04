@@ -28,14 +28,18 @@ const App = function (props) {
   const handleSubmit = useCallback(() => {
     //我要提交
   }, []);
-
-  const handleSelect = useCallback(() => {
-    // 处理弹窗城市选择
-  }, []);
-
   const handleVisible = useCallback(() => {
     setCityVisible(!cityVisible);
   }, [cityVisible]);
+
+  const handleSelect = useCallback(
+    (name) => {
+      // 处理弹窗城市选择
+      console.log('name', name);
+      handleVisible();
+    },
+    [handleVisible]
+  );
 
   return (
     <>
