@@ -7,7 +7,7 @@ import './cityTreeSelect.scss';
 function AlphaIndex(props) {
   const { name, handleClick } = props;
   return (
-    <li className="alpha-item" onClick={handleClick}>
+    <li className="alpha-item" onClick={() => handleClick(name)}>
       {name}
     </li>
   );
@@ -74,7 +74,7 @@ function CityList(props) {
     <div className="city-list">
       {cityData.map((item) => {
         return (
-          <div className="city-content">
+          <div className="city-content" data-cate={item.title}>
             <h4 className="city-title">{item.title}</h4>
             <CitySection
               section={item.citys || []}
@@ -103,8 +103,9 @@ export default function CityTreeSelect(props) {
     hidden: !cityVisible,
   });
 
-  const handleClickAlpha = useCallback(() => {
-    //
+  const handleClickAlpha = useCallback((name) => {
+    //处理点击跳转
+    document.querySelector(`[data-cate=${name}]`).scrollIntoView();
   }, []);
 
   useEffect(() => {
