@@ -13,7 +13,8 @@ import App from './App';
 import store from '../store/store';
 
 import 'normalize.css/normalize.css';
-
+debugger;
+console.log('store', store);
 ReactDOM.render(
   <Provider store={store}>
     <Router>
