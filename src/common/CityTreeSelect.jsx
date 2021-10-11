@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './cityTreeSelect.scss';
+import './cityTreeSelect.less';
 
 function SuggestItem(props) {
   const { name } = props;
